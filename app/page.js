@@ -14,7 +14,12 @@ export default function Home() {
 
   // Function to fetch event counts
   const fetchCounts = async () => {
-    const res = await fetch('/api/events/count');
+    const res = await fetch('/api/events/count', {
+      method: 'GET',
+      headers: {
+        'Cache-Control': 'no-cache'
+      }
+    });
     const data = await res.json();
     setCounts(data);
   };
