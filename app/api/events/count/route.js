@@ -18,14 +18,6 @@ export const GET = async (req) => {
     const startOfMonthUTC = toUTCStartOfDay(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)));
     const startOfYearUTC = toUTCStartOfDay(new Date(Date.UTC(now.getUTCFullYear(), 0, 1)));
 
-    // Debugging: Mostrar as datas geradas
-    console.log({
-      startOfDay: startOfDayUTC,
-      startOfWeek: startOfWeekUTC,
-      startOfMonth: startOfMonthUTC,
-      startOfYear: startOfYearUTC
-    });
-
     // Consultar a contagem de eventos no MongoDB usando 'createdAt' como campo
     const eventsOfDay = await Event.countDocuments({ createdAt: { $gte: startOfDayUTC } });
     const eventsOfWeek = await Event.countDocuments({ createdAt: { $gte: startOfWeekUTC } });
@@ -37,6 +29,14 @@ export const GET = async (req) => {
     const firstEvent = await Event.findOne().sort({ createdAt: 1 });
     const daysSinceFirstEvent = firstEvent ? Math.ceil((now - firstEvent.createdAt) / (1000 * 60 * 60 * 24)) : 0;
     const averageEventsPerDay = daysSinceFirstEvent ? totalEvents / daysSinceFirstEvent : 0;
+
+    console.log({
+      eventsOfDay,
+      eventsOfWeek,
+      eventsOfMonth,
+      eventsOfYear,
+      totalEvents
+    });
 
     // Retornar a resposta com os dados
     return new Response(
