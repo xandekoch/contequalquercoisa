@@ -1,5 +1,3 @@
-import { startOfDay, startOfWeek, startOfMonth, startOfYear } from 'date-fns';
-
 import Event from '@/models/Event';
 import { connectToDB } from '@/utils/database';
 
