@@ -15,7 +15,7 @@ export default function Home() {
   // Function to fetch event counts
   const fetchCounts = async () => {
     const res = await fetch(`/api/events/count?timestamp=${Date.now()}`, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Cache-Control': 'no-store', // Desativa qualquer cache
