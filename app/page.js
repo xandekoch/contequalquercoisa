@@ -14,10 +14,12 @@ export default function Home() {
 
   // Function to fetch event counts
   const fetchCounts = async () => {
-    const res = await fetch('/api/events/count', {
+    const res = await fetch(`/api/events/count?timestamp=${Date.now()}`, {
       method: 'GET',
       headers: {
-        'Cache-Control': 'no-cache'
+        'Cache-Control': 'no-store', // Desativa qualquer cache
+        'Pragma': 'no-cache', // Para navegadores antigos
+        'Expires': '0', // Para navegadores que respeitam o cabeçalho de expiração
       }
     });
     const data = await res.json();

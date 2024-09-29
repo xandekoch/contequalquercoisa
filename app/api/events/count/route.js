@@ -39,17 +39,23 @@ export const GET = async (req) => {
     });
 
     // Retornar a resposta com os dados
-    return new Response(
-      JSON.stringify({
-        eventsOfDay,
-        eventsOfWeek,
-        eventsOfMonth,
-        eventsOfYear,
-        totalEvents,
-        averageEventsPerDay: averageEventsPerDay.toFixed(2),
-      }), 
-      { status: 200 }
-    );
+    const response = new Response(JSON.stringify({
+      eventsOfDay,
+      eventsOfWeek,
+      eventsOfMonth,
+      eventsOfYear,
+      totalEvents,
+      averageEventsPerDay: averageEventsPerDay.toFixed(2),
+    }), {
+      status: 200,
+    });
+
+    // Adicionando cabeçalhos para evitar cache
+    response.headers.set('Cache-Control', 'no-store');
+    response.headers.set('Pragma', 'no-cache');
+    response.headers.set('Expires', '0');
+
+    return response;
   } catch (error) {
     console.error(error);
     return new Response(JSON.stringify({ error: 'Failed to retrieve event counts' }), { status: 500 });
