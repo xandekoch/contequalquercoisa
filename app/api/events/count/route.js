@@ -6,7 +6,7 @@ const toUTCStartOfDay = (date) => {
   return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
 };
 
-export const GET = async (req) => {
+export const POST = async (req) => {
   try {
     await connectToDB();
 

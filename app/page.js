@@ -17,6 +17,7 @@ export default function Home() {
     const res = await fetch(`/api/events/count?timestamp=${Date.now()}`, {
       method: 'GET',
       headers: {
+        'Content-Type': 'application/json',
         'Cache-Control': 'no-store', // Desativa qualquer cache
         'Pragma': 'no-cache', // Para navegadores antigos
         'Expires': '0', // Para navegadores que respeitam o cabeçalho de expiração
