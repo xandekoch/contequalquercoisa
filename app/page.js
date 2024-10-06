@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 
 export default function Home() {
+  //Test
   const [counts, setCounts] = useState({
     eventsOfDay: 0,
     eventsOfWeek: 0,
